@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MY WEBAPP</title>
+  <link href="{{url_for('static', filename='css/template.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
+    integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"
+    integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"
+    integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/"> LOGO </a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="section is-flex is-flex-direction-column is-align-items-center">
+    <h1 class="title">MathApp</h1>
+
+    <!--INPUT-->
+    <form class="formulario" id="form" method="POST">
+      <div class="field">
+        <label for="" class="label">Input: </label>
+        <!--barra de input-->
+        <div class="control is-flex">
+          <input type="search" class="input" id="entrada" name="entry" placeholder="entre com a expressao matematica..."
+            value="{{entry}}" required>
+
+
+          <button class="button is-link is-small" type="submit">
+            <span class="icon-text is-primary">
+              <!-- <i class="fa fa-equals"></i> -->
+              <i class="fa fa-terminal"></i>
+
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+      <!--BUTTONS-->
+      <div class="field control  container">
+        <button class="button is-link" type="button" onclick="writer('diff' )">D</button>
+        <button class="button is-link" type="button" onclick="writer('integrate' )">I</button>
+        <button class="button is-link" type="button" onclick="writer('diff')">D2</button>
+        <button class="button is-link" type="button" onclick="writer('exp')">e</button>
+      </div>
+
+      <!--OUTPUT-->
+      <div class="field">
+        <label for="" class="label">Output: </label>
+        <div class="control box">
+          {% if output != None %}
+          <p id="output">
+            \({{output}}\)
+          </p>
+          {% endif %}
+        </div>
+      </div>
+
+    </form>
+
+  </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>MathApp</strong> by <a href="https://www.github.com/ricardobr3no">Ricardo Aguiar</a>.
+        The source code is licensed
+        <a href="https://opensource.org/license/mit">MIT</a>. The
+        website content is licensed
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY NC SA 4.0</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const output = document.getElementById('output')
+
+    function writer(func) {
+      let expr = func + "()"
+      // Array(expr).splice(expr.length - 1, 0, func)
+      console.log(expr)
+
+      const input = document.getElementById('entrada')
+      input.value += expr
+    }
+
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        // customised options
+        // • auto-render specific keys, e.g.:
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        // • rendering keys, e.g.:
+        throwOnError: false
+      });
+    });
+  </script>
+</body>
+
+</html>
