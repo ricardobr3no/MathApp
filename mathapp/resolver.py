@@ -1,7 +1,9 @@
 from typing import Any
 import sympy
+from sympy import Integral, Derivative, init_printing
+init_printing(use_unicode=True)
 
-def expr_formarted(entry_expression: str):
+def expr_formarted(entry_expression) -> sympy.Expr:
     expression = ""
     var_control = {}
 
@@ -22,16 +24,18 @@ def expr_formarted(entry_expression: str):
     return expression
 
 
-def expr_latex(entry_expression: sympy.Expr | Any):
-    return sympy.latex(entry_expression)
+def sympy_to_latex(expr):
+    expression = expr_formarted(expr)
+    return sympy.latex(expression)
 
 
 def resolver(entry_expression: str, mode: int = 1):
-    expression = expr_formarted(entry_expression)
+    expression = expr_formarted(entry_expression).doit()
     answer = sympy.expand(expression) if mode != 2 else sympy.factor(expression)
     return sympy.latex(answer)
     
-    
+
+
 if __name__ == "__main__":
     pass
 

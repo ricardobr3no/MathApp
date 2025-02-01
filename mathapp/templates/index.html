@@ -37,38 +37,38 @@
     <form class="formulario" id="form" method="POST">
       <div class="field">
         <label for="" class="label">Input: </label>
-        <!--barra de input-->
+        <!--barra de input 1-->
         <div class="control is-flex">
-          <input type="search" class="input" id="entrada" name="entry" placeholder="entre com a expressao matematica..."
-            value="{{entry}}" required>
-
+          <input type="search" class="input" id="entrada" name="entrada"
+            placeholder="entre com a expressao matematica..." value="{{entrada}}" required>
 
           <button class="button is-link is-small" type="submit">
             <span class="icon-text is-primary">
               <!-- <i class="fa fa-equals"></i> -->
               <i class="fa fa-terminal"></i>
-
             </span>
           </button>
-
         </div>
       </div>
 
       <!--BUTTONS-->
-      <div class="field control  container">
-        <button class="button is-link" type="button" onclick="writer('diff' )">D</button>
-        <button class="button is-link" type="button" onclick="writer('integrate' )">I</button>
-        <button class="button is-link" type="button" onclick="writer('diff')">D2</button>
-        <button class="button is-link" type="button" onclick="writer('exp')">e</button>
+      <div class="field control container">
+        <button class="button is-link is-small" type="button" onclick="">$\frac {d} {d x} f(x)$</button>
+        <button class="button is-link is-small" type="button" onclick="">$ \int f(x)$</button>
+        <button class="button is-link is-small" type="button" onclick="">$\frac {d^2} {d x^2} f(x)$</button>
+        <button class="button is-link is-small" type="button" onclick="">${e^x}$</button>
       </div>
 
+      <div class="field">
+        \( {{entrada_formatada}} \)
+      </div>
       <!--OUTPUT-->
       <div class="field">
         <label for="" class="label">Output: </label>
         <div class="control box">
           {% if output != None %}
           <p id="output">
-            \({{output}}\)
+            \( {{output}} \)
           </p>
           {% endif %}
         </div>
@@ -91,16 +91,11 @@
   </footer>
 
   <script>
-    const output = document.getElementById('output')
 
-    function writer(func) {
-      let expr = func + "()"
-      // Array(expr).splice(expr.length - 1, 0, func)
-      console.log(expr)
+    const derivada = () => {
 
-      const input = document.getElementById('entrada')
-      input.value += expr
     }
+
 
   </script>
   <script>

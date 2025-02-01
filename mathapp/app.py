@@ -1,23 +1,26 @@
 from flask import Flask, render_template, request
-from .resolver import expr_latex, resolver
+from .resolver import resolver, expr_formarted, sympy_to_latex
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     output = ''
-    entry = request.form.get("entry")
+    entrada = request.form.get("entrada")
+    entrada_formatada = entrada
 
     if request.method == 'POST':
         try:
-            output = resolver(str(entry), mode=2)
+            output = resolver(str(entrada), mode=2)
+            entrada_formatada = sympy_to_latex(entrada);
+            print(entrada_formatada)
+
         except:
             print("nao foi possivel a expressao")
             output = "INVALIDO"
 
-        print(entry, output)
+        print(entrada, output)
 
-    return render_template( "index.html", teste='teste', output=output, entry=entry # transformar no formato LATEX
-)
+    return render_template("index.html", teste='teste', output=output, entrada=entrada, entrada_formatada=entrada_formatada)
 
 
