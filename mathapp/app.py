@@ -6,8 +6,15 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     output = ''
-    entrada = request.form.get("entrada")
+    entrada = request.form.get("entrada") if request.form.get("entrada") else ""
+
     entrada_formatada = entrada
+
+    try:
+        entrada_formatada = sympy_to_latex(entrada);
+    except :
+        print("deu eroo")
+
 
     if request.method == 'POST':
         try:

@@ -10,11 +10,18 @@ def expr_formarted(entry_expression) -> sympy.Expr:
     for i, element in enumerate(entry_expression): # refact expression
         expression += element
         if i < len(entry_expression) - 1:
+            
+            # adicione * quando nao especificado
+            if element.isdigit() and entry_expression[i+1].isalpha():
+                expression += '*'
+            
+            # adiciona espaços entre os termos
             if (
                 element in "+-*/()" and entry_expression[i+1].isdigit() or 
                 element.isdigit() and entry_expression[i+1] in "+-*/()"
             ):
                 expression += ' '
+
     
     for v in expression.split(): # var control
         if v.isalnum():

@@ -3,5 +3,7 @@
 }
 
 #output {
-  font-size: 35px;
+  font-size: 1.1rem;
+  overflow: scroll;
+  overflow-wrap: normal;
 }

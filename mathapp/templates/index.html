@@ -39,7 +39,7 @@
         <label for="" class="label">Input: </label>
         <!--barra de input 1-->
         <div class="control is-flex">
-          <input type="search" class="input" id="entrada" name="entrada"
+          <input type="search" class="input" id="entrada element" name="entrada"
             placeholder="entre com a expressao matematica..." value="{{entrada}}" required>
 
           <button class="button is-link is-small" type="submit">
@@ -51,17 +51,19 @@
         </div>
       </div>
 
-      <!--BUTTONS-->
-      <div class="field control container">
-        <button class="button is-link is-small" type="button" onclick="">$\frac {d} {d x} f(x)$</button>
-        <button class="button is-link is-small" type="button" onclick="">$ \int f(x)$</button>
-        <button class="button is-link is-small" type="button" onclick="">$\frac {d^2} {d x^2} f(x)$</button>
-        <button class="button is-link is-small" type="button" onclick="">${e^x}$</button>
-      </div>
-
-      <div class="field">
+      <div class="field" id="element">
         \( {{entrada_formatada}} \)
       </div>
+      <!--BUTTONS-->
+      <div class="field control container">
+        <button class="button is-link is-small" type="button" onclick="addFunction('deriv-1')">$\frac {d} {d x}
+          f(x)$</button>
+        <button class="button is-link is-small" type="button" onclick="addFunction('int')">$ \int f(x)$</button>
+        <button class="button is-link is-small" type="button" onclick="addFunction('deriv-2')">$\frac {d^2} {d x^2}
+          f(x)$</button>
+        <button class="button is-link is-small" type="button" onclick="addFunction('e')">${e^x}$</button>
+      </div>
+
       <!--OUTPUT-->
       <div class="field">
         <label for="" class="label">Output: </label>
@@ -92,7 +94,38 @@
 
   <script>
 
-    const derivada = () => {
+    const formulaInput = document.getElementById('entrada');
+    const element = document.getElementById('element');
+
+    formulaInput.addEventListener("keyup", (e) => {
+
+      katex.render(formulaInput.value, element, {
+        throwOnError: false
+      })
+    });
+
+    // katex.render(formulaInput.value, element, {
+    //   throwOnError: false
+    // });
+
+    const addFunction = (typeFunction) => {
+      switch (typeFunction) {
+        case "deriv-1":
+          formulaInput.value += "Derivative(function?, x?)"
+          break;
+        case "deriv-2":
+          formulaInput.value += "Derivative(function?, x?, x?)"
+          break;
+        case "int":
+          formulaInput.value += "Integral(function?, x?)"
+          break;
+        case "e":
+          formulaInput.value += "Derivative(x?)"
+          break;
+
+        default:
+          break;
+      }
 
     }
 
