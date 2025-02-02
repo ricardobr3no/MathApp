@@ -2,6 +2,10 @@
   width: 50%;
 }
 
+.logo {
+  scale: 1.6;
+}
+
 #output {
   font-size: 1.1rem;
   overflow: scroll;

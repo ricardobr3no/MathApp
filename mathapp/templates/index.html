@@ -22,10 +22,12 @@
 </head>
 
 <body>
+
   <header>
-    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/"> LOGO </a>
+        <a class="navbar-item" href="/"> <img class="logo" src="{{url_for('static', filename='assets/logo.jpg')}}"
+            alt=""> </a>
       </div>
     </nav>
   </header>
@@ -34,7 +36,7 @@
     <h1 class="title">MathApp</h1>
 
     <!--INPUT-->
-    <form class="formulario" id="form" method="POST">
+    <form class="formulario" id="form" method="POST" onkeydown="submitEnter()">
       <div class="field">
         <label for="" class="label">Input: </label>
         <!--barra de input 1-->
@@ -94,19 +96,28 @@
 
   <script>
 
+    const formulario = document.getElementById('form');
     const formulaInput = document.getElementById('entrada');
     const element = document.getElementById('element');
 
-    formulaInput.addEventListener("keyup", (e) => {
+    function submitEnter() {
+      formulario.addEventListener('keypress', (e) => {
+        if (e.key === "Enter" && formulaInput.value !== "") {
+          console.log(e);
+          formulario.submit();
+        }
+      });
+    }
 
+    formulaInput.addEventListener("keyup", (e) => {
       katex.render(formulaInput.value, element, {
         throwOnError: false
       })
     });
 
-    // katex.render(formulaInput.value, element, {
-    //   throwOnError: false
-    // });
+    katex.render(formulaInput.value, element, {
+      throwOnError: false
+    });
 
     const addFunction = (typeFunction) => {
       switch (typeFunction) {
